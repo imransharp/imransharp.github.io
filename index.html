@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imran Bhatti — Python Engineer · AI Automation · System Integration</title>
+<meta name="description" content="Senior Python Engineer with 10+ years building automation pipelines, system integrations, and enterprise platforms at scale. Based in Islamabad, open to remote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0B0F14;
+    --bg2: #111620;
+    --bg3: #181e2a;
+    --teal: #1DB88A;
+    --teal-dim: #0F6E52;
+    --teal-glow: rgba(29, 184, 138, 0.12);
+    --white: #F0F4F8;
+    --gray: #8A9BB0;
+    --gray2: #4A5568;
+    --border: rgba(255,255,255,0.07);
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --body: 'Instrument Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(29,184,138,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,184,138,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(11,15,20,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner { max-width: 780px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    border: 1px solid var(--teal-dim);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    background: var(--teal-glow);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span { color: var(--teal); }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-desc strong { color: var(--white); font-weight: 500; }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #0B0F14;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 13px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 13px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+
+  /* ── STATS ROW ── */
+  .stats {
+    position: relative;
+    z-index: 1;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .stat {
+    padding: 20px 40px 20px 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; padding-left: 40px; padding-right: 0; }
+  .stat:not(:first-child) { padding-left: 40px; }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+  }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--teal-dim);
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 56px;
+    line-height: 1.1;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--teal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover { border-color: rgba(29,184,138,0.25); background: var(--bg3); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .project-index {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray2);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .project-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .project-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .project-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project-stat-num {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  .project-stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    border: 1px solid var(--teal-dim);
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: var(--teal-glow);
+  }
+
+  .project-visual {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 2;
+  }
+
+  .code-line { display: flex; gap: 16px; }
+  .code-num { color: var(--gray2); min-width: 20px; text-align: right; }
+  .code-kw { color: #C792EA; }
+  .code-fn { color: #82AAFF; }
+  .code-str { color: var(--teal); }
+  .code-cm { color: var(--gray2); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .skill-group {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    transition: border-color 0.3s;
+  }
+
+  .skill-group:hover { border-color: rgba(29,184,138,0.2); }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  .skill-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .exp-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    transition: border-color 0.3s;
+  }
+
+  .exp-item:hover { border-color: rgba(29,184,138,0.2); }
+
+  .exp-meta { display: flex; flex-direction: column; gap: 6px; }
+
+  .exp-dates {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray2);
+    letter-spacing: 0.05em;
+  }
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+  }
+
+  .exp-title {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .exp-bullets li {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    color: var(--teal);
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-desc {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--teal-dim); color: var(--teal); }
+
+  .contact-link-icon {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    min-width: 24px;
+  }
+
+  .avail-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    border-radius: 2px;
+  }
+
+  .avail-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .avail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gray);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .avail-item:last-child { border-bottom: none; }
+
+  .avail-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray2);
+  }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray2);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    section { padding: 60px 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .project-visual { display: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">imranbhatti.dev</div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Available for remote roles</div>
+    <p class="hero-sub">Python · AI Automation · System Integration</p>
+    <h1>Imran<br><span>Bhatti</span></h1>
+    <p class="hero-desc">
+      Senior engineer who builds Python automation systems that
+      <strong>process millions of records</strong>, eliminate manual operations,
+      and save real money — at production scale across telecom, ERP, and enterprise platforms.
+    </p>
+    <div class="hero-ctas">
+      <a href="mailto:imranb.bhatti@gmail.com" class="btn-primary">Get in touch →</a>
+      <a href="https://www.linkedin.com/in/imran-bhatti-dev" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+      <a href="https://github.com/imransbhatti" target="_blank" class="btn-secondary">GitHub ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat reveal">
+      <div class="stat-num">3M</div>
+      <div class="stat-label">Records processed / day</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">80%</div>
+      <div class="stat-label">Error reduction achieved</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label">Daily users served</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years of production systems</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Selected work</div>
+    <h2 class="section-title">Systems built<br>at real scale.</h2>
+
+    <div class="projects-grid">
+
+      <!-- Featured: Zong Automation -->
+      <div class="project-card featured reveal">
+        <div>
+          <div class="project-index">// 01 — Telecom · Python</div>
+          <h3 class="project-title">Zong CMPak<br>Automation Pipeline</h3>
+          <p class="project-desc">Built end-to-end Python automation that runs live on Pakistan's national telecom network. Replaced a slow, error-prone manual process with a pipeline that never stops — processing 3 million records every single day.</p>
+          <div class="project-stats">
+            <div class="project-stat">
+              <div class="project-stat-num">3M</div>
+              <div class="project-stat-label">Records / day</div>
+            </div>
+            <div class="project-stat">
+              <div class="project-stat-num">80%</div>
+              <div class="project-stat-label">Errors eliminated</div>
+            </div>
+            <div class="project-stat">
+              <div class="project-stat-num">1.2M</div>
+              <div class="project-stat-label">PKR saved / year</div>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Telecom</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">ETL</span>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="code-line"><span class="code-num">1</span><span class="code-cm"># Zong CMPak · Production Pipeline</span></div>
+          <div class="code-line"><span class="code-num">2</span><span></span></div>
+          <div class="code-line"><span class="code-num">3</span><span class="code-kw">def </span><span class="code-fn">process_daily_records</span><span>(batch):</span></div>
+          <div class="code-line"><span class="code-num">4</span><span>  records = fetch_from_telecom(batch)</span></div>
+          <div class="code-line"><span class="code-num">5</span><span>  validated = validate_pipeline(records)</span></div>
+          <div class="code-line"><span class="code-num">6</span><span>  result = push_to_network(validated)</span></div>
+          <div class="code-line"><span class="code-num">7</span><span>  <span class="code-kw">return</span> result</span></div>
+          <div class="code-line"><span class="code-num">8</span><span></span></div>
+          <div class="code-line"><span class="code-num">9</span><span class="code-cm"># → 3,000,000 records daily</span></div>
+          <div class="code-line"><span class="code-num">10</span><span class="code-cm"># → 80% fewer errors</span></div>
+          <div class="code-line"><span class="code-num">11</span><span class="code-cm"># → PKR 1.2M saved per year</span></div>
+        </div>
+      </div>
+
+      <!-- COMSATS -->
+      <div class="project-card reveal">
+        <div class="project-index">// 02 — Enterprise · ASP.NET · Python</div>
+        <h3 class="project-title">COMSATS Student<br>Information System</h3>
+        <p class="project-desc">Sole architect of a national-scale platform serving every COMSATS campus in Pakistan. Designed from scratch — data model, API layer, 6 academic modules, reporting infrastructure. Led a team of 6 for 7 years.</p>
+        <div class="project-stats">
+          <div class="project-stat">
+            <div class="project-stat-num">50K+</div>
+            <div class="project-stat-label">Users / day</div>
+          </div>
+          <div class="project-stat">
+            <div class="project-stat-num">65%</div>
+            <div class="project-stat-label">Faster page loads</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">ASP.NET MVC</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Architecture</span>
+          <span class="tag">REST APIs</span>
+        </div>
+      </div>
+
+      <!-- NUST -->
+      <div class="project-card reveal">
+        <div class="project-index">// 03 — ERP · Python · Odoo</div>
+        <h3 class="project-title">NUST Internal<br>Automation Suite</h3>
+        <p class="project-desc">3 internal automation tools built from scratch for one of Pakistan's top universities — Counsellor Appointment System, Leave Management System, and File Tracker. Replaced manual paper workflows used by hundreds of staff daily.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Odoo</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Integration</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical depth</div>
+    <h2 class="section-title">What I build with.</h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-label">Core Stack</div>
+        <div class="skill-items">
+          <div class="skill-item"><div class="skill-dot"></div>Python — automation, pipelines, scripting</div>
+          <div class="skill-item"><div class="skill-dot"></div>REST APIs — design, integration, orchestration</div>
+          <div class="skill-item"><div class="skill-dot"></div>System Integration — end-to-end</div>
+          <div class="skill-item"><div class="skill-dot"></div>ETL / Data Pipelines</div>
+          <div class="skill-item"><div class="skill-dot"></div>AI Integration</div>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-label">Databases & Backend</div>
+        <div class="skill-items">
+          <div class="skill-item"><div class="skill-dot"></div>PostgreSQL</div>
+          <div class="skill-item"><div class="skill-dot"></div>SQL Server — stored procedures, optimisation</div>
+          <div class="skill-item"><div class="skill-dot"></div>ASP.NET MVC · C#</div>
+          <div class="skill-item"><div class="skill-dot"></div>Odoo ORM & Framework</div>
+          <div class="skill-item"><div class="skill-dot"></div>PHP · IIS · Git</div>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-label">Domains</div>
+        <div class="skill-items">
+          <div class="skill-item"><div class="skill-dot"></div>Telecom platforms</div>
+          <div class="skill-item"><div class="skill-dot"></div>ERP systems</div>
+          <div class="skill-item"><div class="skill-dot"></div>University information systems</div>
+          <div class="skill-item"><div class="skill-dot"></div>HIPAA-compliant healthcare</div>
+          <div class="skill-item"><div class="skill-dot"></div>High-availability enterprise systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Work history</div>
+    <h2 class="section-title">10+ years.<br>Real systems.</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-dates">Mar 2023 — Present</div>
+          <div class="exp-company">Zong CMPak Ltd</div>
+        </div>
+        <div>
+          <div class="exp-title">Software Developer & Integration Engineer</div>
+          <ul class="exp-bullets">
+            <li>Built Python pipeline processing 3M records/day — 80% fewer errors, PKR 1.2M/year saved</li>
+            <li>Maintained Zong Track on Pakistan's live telecom network</li>
+            <li>Integrated internal systems via REST APIs, reducing turnaround time</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-dates">Jan 2022 — Feb 2023</div>
+          <div class="exp-company">NUST</div>
+        </div>
+        <div>
+          <div class="exp-title">Senior Integration Engineer</div>
+          <ul class="exp-bullets">
+            <li>Delivered 3 Python/Odoo automation tools from scratch for one of Pakistan's top universities</li>
+            <li>Replaced paper workflows with digital systems used daily by staff across departments</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-dates">Nov 2014 — Dec 2021</div>
+          <div class="exp-company">COMSATS</div>
+        </div>
+        <div>
+          <div class="exp-title">Technical Lead & Solution Architect</div>
+          <ul class="exp-bullets">
+            <li>Sole architect — national platform, 50,000+ daily users, all campuses in Pakistan</li>
+            <li>Page loads −65%, report generation 8min → 45sec, transcript processing 3 days → 4 hours</li>
+            <li>Led team of 6 · 15 major releases · zero critical incidents in final 3 years</li>
+            <li>Honorarium Award for outstanding delivery</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-dates">Nov 2011 — Nov 2013</div>
+          <div class="exp-company">MTBC</div>
+        </div>
+        <div>
+          <div class="exp-title">Web Application Programmer</div>
+          <ul class="exp-bullets">
+            <li>Built EHR and patient management systems in HIPAA-compliant environment</li>
+            <li>Won Best Team Award for delivery quality</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's work together</div>
+    <h2 class="section-title">Open to the<br>right role.</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-desc">Looking for senior Python and AI Automation engineering roles — remote or Islamabad. If you're building something that needs reliable automation at scale, let's talk.</p>
+        <div class="contact-links">
+          <a href="mailto:imranb.bhatti@gmail.com" class="contact-link">
+            <span class="contact-link-icon">@</span>
+            imranb.bhatti@gmail.com
+          </a>
+          <a href="tel:+923175813489" class="contact-link">
+            <span class="contact-link-icon">✆</span>
+            +92 317 581 3489
+          </a>
+          <a href="https://www.linkedin.com/in/imran-bhatti-dev" target="_blank" class="contact-link">
+            <span class="contact-link-icon">in</span>
+            linkedin.com/in/imran-bhatti-dev
+          </a>
+          <a href="https://github.com/imransbhatti" target="_blank" class="contact-link">
+            <span class="contact-link-icon">gh</span>
+            github.com/imransbhatti
+          </a>
+        </div>
+      </div>
+      <div class="avail-box reveal">
+        <div class="avail-title">Currently available for</div>
+        <div class="avail-item"><div class="avail-dot"></div>Full-time remote roles</div>
+        <div class="avail-item"><div class="avail-dot"></div>On-site — Islamabad</div>
+        <div class="avail-item"><div class="avail-dot"></div>Contract / freelance projects</div>
+        <div class="avail-item"><div class="avail-dot"></div>Python automation consulting</div>
+        <div class="avail-item"><div class="avail-dot"></div>System integration projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">Imran Bhatti · Islamabad, Pakistan · 2025</div>
+  <div class="footer-right">Python Engineer · AI Automation · System Integration</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--teal)' : '';
+    });
+  });
+</script>
+</body>
+</html>
